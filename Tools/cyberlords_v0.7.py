@@ -817,12 +817,7 @@ def api_update_item():
         if len(raw) > max_len:
             return jsonify({'error': f'String excede {max_len} bytes ({len(raw)} bytes).'}), 400
         items[idx]['text'] = text
-        # Persist to file immediately
-        out_bytes = serialize_lng(state['parsed'])
-        save_path = state['filepath'] or 'EN_MAIN_edited.lng'
-        with open(save_path, 'wb') as f:
-            f.write(out_bytes)
-        return jsonify({'ok': True, 'path': save_path})
+        return jsonify({'ok': True})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
